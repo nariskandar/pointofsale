@@ -364,12 +364,6 @@ $stok1 = mysqli_query($conn, "SELECT terjual FROM barang WHERE terjual>'0' order
 <!-- akhir chart -->
                 <div class="row">
                 <?php if($_SESSION['jabatan'] !='admin'){}else{ ?>
-                <div class="col-lg-6">
-                 <div class="box box-default">
-            <div class="box-header with-border">
-              <h3 class="box-title">Berita Informasi</h3>
-            </div>
-                                <!-- /.box-header -->
 
                                 <div class="box-body">
                 <div class="table-responsive">
@@ -407,59 +401,8 @@ $stok1 = mysqli_query($conn, "SELECT terjual FROM barang WHERE terjual>'0' order
    <?php } ?>
 
 
-  <form method="post" >
-
-
-    <div class="form-group">
-                <textarea class="textarea" name="isi" placeholder="<?php echo $isi;?>" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" value="<?php echo $ketentuane;?>"></textarea>
-
-            </div>
-
-  </div>
-
-    <div class="col-sm-6" >
-<br/>
-    </div>
-    <div class="col-sm-12" align="left">
-  <button type="submit" class="btn btn-default btn-flat" name="simpan"><span class="glyphicon glyphicon-floppy-disk"></span> Simpan</button>
-<br/>
-    </div>
-
-
-
-
-  </form>
 </div>
 
-
-
-
-<?php
-  if($_SERVER["REQUEST_METHOD"] == "POST"){
-            $id = 1;
-          $nama=  $_SESSION['nama'];
-                  $avatar= $_SESSION['avatar'];
-                  $tanggal = date('Y-m-d');
-                  $isi= $_POST["isi"];
-
-                  if(isset($_POST['simpan'])){
-           $sql="select * from info";
-                  $result=mysqli_query($conn,$sql);
-
-              if(mysqli_num_rows($result)>0){
-
-           $sql1 = "update info set nama='$nama', avatar='$avatar',tanggal='$tanggal', isi='$isi' where id='1'";
-             $result = mysqli_query($conn, $sql1);
-
-        }else{
-                $sql1 = "insert into info values('$nama','$tanggal','$isi','$avatar','$id')";
-              $result = mysqli_query($conn, $sql1);
-        }
-          }
-  }
-
-
-         ?>
 
 
 
@@ -467,26 +410,6 @@ $stok1 = mysqli_query($conn, "SELECT terjual FROM barang WHERE terjual>'0' order
 
                                 </div>
                 </div>
-  <!-- TIMER -->
-<div id="counter" style="display: none;">3</div>
-<script type="text/javascript">
-function countdown() {
-    var i = document.getElementById('counter');
-    if (parseInt(i.innerHTML)<=0) {
-        $('#loading').hide();
-      clearInterval(counter);
-   resetEverything();
-   recognition.stop();
-    }
-    i.innerHTML = parseInt(i.innerHTML)-1;
-
-}
-setInterval(function(){ countdown(); },1000);
-</script>
-<!-- /.TIMER -->
-                                <!-- /.box-body -->
-
-                  <div class="overlay" id="loading">  <i class="fa fa-refresh fa-spin"></i></div>
 
                             </div>
               </div>
@@ -528,47 +451,8 @@ setInterval(function(){ countdown(); },1000);
               <?php } ?>
           <!-- Box Comment -->
 
-<div class="box box-widget">
-    <div class="box-header with-border">
-        <h4>Barang Terlaris hari ini</h4>
-        <div class="box-tools">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-            </button>
-            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-        </div>
-    </div>
-    <div class="box-body">
-        <?php echo $isi; ?>
 
-    </div>
-    <!-- /.box-body -->
-</div>
 
-<div class="box box-widget">
-    <div class="box-header with-border">
-        <div class="user-block">
-            <img class="img-circle" src="<?php  echo $avatar; ?>" alt="User Image">
-            <span class="username"><?php  echo $nama; ?></span>
-            <span class="description"><?php echo $tanggal; ?></span>
-        </div>
-        <!-- /.user-block -->
-        <div class="box-tools">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-            </button>
-            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-        </div>
-        <!-- /.box-tools -->
-    </div>
-    <!-- /.box-header -->
-    <div class="box-body">
-        <!-- post text -->
-        <?php echo $isi; ?>
-
-    </div>
-    <!-- /.box-body -->
-</div>
-
-<a href="#" class="btn btn-info">Kirim Data</a>
 
 </div>
 </div>
