@@ -38,9 +38,9 @@ foreach ($arr as $key => $value) {
                 $result = mysqli_query($connServer, "SELECT * FROM barang WHERE kode='$get[0]'");
 
                 if (mysqli_num_rows($result) > 0) {
-                    $sql1 = "UPDATE barang SET barcode='$get[16]', kode='$get[0]', nama='$get[1]', hargabeli='$get[2]', hargajual='$get[3]', keterangan= '$get[4]', kategori='$get[5]', terjual='$get[6]', terbeli='$get[7]', sisa='$get[8]', isipersatuan='$get[9]', terjualeceran='$get[10]', terbelieceran='$get[11]', stokeceran='$get[12]', deposit='$get[14]', brand='$get[15]', satuan='$get[17]' where kode='$get[0]'";
+                    $sql1 = "UPDATE barang SET barcode='$get[16]', kode='$get[0]', nama='$get[1]', hargabeli='$get[2]', hargajual='$get[3]', keterangan= '$get[4]', kategori='$get[5]', terjual='$get[6]', terbeli='$get[7]', sisa='$get[8]', isipersatuan='$get[9]', terjualeceran='$get[10]', terbelieceran='$get[11]', stokeceran='$get[12]', deposit='$get[14]', brand='$get[15]', satuan='$get[17]', last_update='$get[18]' where kode='$get[0]'";
                 } else {
-                    $sql1 = "INSERT INTO barang (kode, nama, hargabeli, hargajual, keterangan, kategori, terjual, terbeli, sisa, isipersatuan, terjualeceran, terbelieceran, stokeceran, deposit, brand, barcode, satuan) values ('$get[0]', '$get[1]', '$get[2]', '$get[3]', '$get[4]', '$get[5]', '$get[6]',  '$get[7]',  '$get[8]',  '$get[9]', '$get[10]', '$get[11]', '$get[12]', '$get[14]', '$get[15]', '$get[16]', '$get[17]')";
+                    $sql1 = "INSERT INTO barang (kode, nama, hargabeli, hargajual, keterangan, kategori, terjual, terbeli, sisa, isipersatuan, terjualeceran, terbelieceran, stokeceran, deposit, brand, barcode, satuan, last_update) values ('$get[0]', '$get[1]', '$get[2]', '$get[3]', '$get[4]', '$get[5]', '$get[6]',  '$get[7]',  '$get[8]',  '$get[9]', '$get[10]', '$get[11]', '$get[12]', '$get[14]', '$get[15]', '$get[16]', '$get[17]', '$get[18]')";
                 }
                 
                 $getData = mysqli_query($connServer, $sql1);
