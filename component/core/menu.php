@@ -142,33 +142,6 @@ if($chmenu4 >= 1 || $_SESSION['jabatan'] == 'admin'){ ?>
                         </li>
 <?php }else{}
 
-if($chmenu3 >= 1 || $_SESSION['jabatan'] == 'admin'){ ?>
-
-                        <li class="treeview">
-                            <a href="#"> <i class="glyphicon glyphicon-tag"></i> <span>Kategori dan Brand</span> <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i> </span> </a>
-               <ul class="treeview-menu">
-                                <li>
-                                    <a href="kategori"><i class="fa fa-circle-o"></i>Data Kategori</a>
-                                </li>
-                                  <li>
-                                    <a href="add_kategori"><i class="fa fa-circle-o"></i>Tambah Kategori</a>
-                                 </li>
-
-                                 <li>
-                                    <a href="merek"><i class="fa fa-circle-o"></i>Data Brand</a>
-                                 </li>
-
-                                 <li>
-                                    <a href="add_merek"><i class="fa fa-circle-o"></i>Tambah Brand</a>
-                                 </li>
-                            </ul>
-                        </li>
-
-
-  <?php }else{}
-
-  
-
 if($chmenu10 >= 1 || $_SESSION['jabatan'] == 'admin'){ ?>
 
 
