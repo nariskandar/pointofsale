@@ -44,6 +44,7 @@ foreach ($arr as $key => $value) {
                 }
                 
                 $getData = mysqli_query($connServer, $sql1);
+                var_dump($getData);
 
             }
         }
@@ -68,7 +69,7 @@ foreach ($arr as $key => $value) {
                         $sql1 = "INSERT INTO bayar (nota, tglbayar, bayar, total, kembali, keluar, kasir, last_update) values ('$get[0]', '$date', '$get[2]', '$get[3]', '$get[4]', '$get[5]', '$get[6]', '$get[8]')";
                     }
                     $getData = mysqli_query($connServer, $sql1);
-
+                    var_dump($getData);
                 }
             }
 
@@ -85,7 +86,7 @@ foreach ($arr as $key => $value) {
                         $sql1 = "INSERT INTO beli (nota, tglbeli, total, supplier, kasir, keterangan, last_update) values ('$get[0]', '$date', '$get[2]', '$get[3]', '$get[4]', '$get[5]', '$get[7]')";
                     }
                     $getData = mysqli_query($connServer, $sql1);
-
+                    var_dump($getData);
                 }
             }
             
@@ -96,8 +97,6 @@ foreach ($arr as $key => $value) {
                 foreach ($sheet->getRowIterator() as $rn => $get) {
                     // echo "<pre>".json_encode($get, JSON_PRETTY_PRINT)."</pre>"; continue;
                     $result = mysqli_query($connServer, "SELECT * FROM transaksibeli WHERE no='$get[6]'");
-var_dump($get[6]);
-// die;    
                     if (mysqli_num_rows($result) > 0) {
                         $sql1 = "UPDATE transaksibeli SET nota='$get[0]', kode='$get[1]', nama='$get[2]', harga='$get[3]', jumlah='$get[4]', hargaakhir='$get[5]', flagging='$get[7]', last_update='$get[8]' WHERE no='$get[6]' ";
                     } else {
@@ -105,7 +104,7 @@ var_dump($get[6]);
                     }
                     
                     $getData = mysqli_query($connServer, $sql1);
-
+                    var_dump($getData);
                 }
             }
 
@@ -123,7 +122,7 @@ var_dump($get[6]);
                         $sql1 = "INSERT INTO transaksimasuk (nota, kode, nama, harga, hargabeli, jumlah, hargaakhir, hargabeliakhir, flagging, last_update) values ('$get[0]', '$get[1]', '$get[2]', '$get[3]', '$get[4]', '$get[5]', '$get[6]', '$get[7]', '$get[9]', '$get[10]')";
                     }
                     $getData = mysqli_query($connServer, $sql1);
-
+                    var_dump($getData);
                 }
             }
 

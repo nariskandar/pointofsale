@@ -249,9 +249,23 @@ AND tglbayar BETWEEN '".$tgl1."' AND '".$tgl2."' GROUP BY tglbayar");
          <script>
 
          </script>
+
+         
     
     </div>
+
+
+    <!-- <div class="col-md-6">
+            <div class="box box-solid box-success">
+            <h5>tes</h5>
+            </div>
+    </div> -->
+
+
+
 </div>
+
+
 
 <div class="col-lg-6 col-xs-12 col-sm 12">
       <div class="box box-solid box-success">
@@ -260,6 +274,7 @@ $barang1      = mysqli_query($conn, "SELECT nama FROM barang WHERE terjual>'0' o
 
 $stok1 = mysqli_query($conn, "SELECT terjual FROM barang WHERE terjual>'0' order by terjual desc LIMIT 0, 10");
 ?>
+
 
 
 

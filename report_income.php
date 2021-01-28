@@ -98,12 +98,14 @@ error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
 include "configuration/config_chmod.php";
 $halaman = "report_income"; // halaman
 $dataapa = "Income"; // data
-$tabeldatabase = "bayar"; // tabel database
+$tabeldatabase = "bayar";
 $chmod = $chmenu9; // Hak akses Menu
-$forward = mysqli_real_escape_string($conn, $tabeldatabase); // tabel database
-$forwardpage = mysqli_real_escape_string($conn, $halaman); // halaman
+$forward = mysqli_real_escape_string($conn, $tabeldatabase);
+$forwardpage = mysqli_real_escape_string($conn, $halaman);
 $bulan = $_POST['bulan'];
 $tahun = $_POST['tahun'];
+$datepickerstart = $_POST['datepickerstart'];
+$datepickeremd   = $_POST['datepickerend'];
 
 ?>
 
@@ -171,55 +173,107 @@ if($tahun == null || $tahun == "" ){
             <div class="box-header">
             <h3 class="box-title">Data <?php echo $dataapa ?>  <span class="no-print label label-default" id="no-print"><?php echo $totaldata; ?></span>
           </h3>
+          
 
         <form method="post">
         <br/>
         <div class="col-lg-12 col-md-12 col-sm-12 no-print" id="no-print">
 
-  <div class="col-lg-3 col-md-3 col-sm-3">
-                  <select class="form-control select2" style="width: 100%;" name="bulan" required>
-                    <option></option>
-        <option value='01'>Januari</option>
-          <option value='02'>Februari</option>
-            <option value='03'>Maret</option>
-              <option value='04'>April</option>
-                <option value='05'>Mei</option>
-                  <option value='06'>Juni</option>
-                    <option value='07'>Juli</option>
-                      <option value='08'>Agustus</option>
-                        <option value='09'>September</option>
-                          <option value='10'>Oktober</option>
-                            <option value='11'>November</option>
-                              <option value='12'>Desember</option>
-                  </select>
+        <div class="row">
+        <div class="col-md-6">
+          <h5>Filter Berdasarkan Bulan dan Tahun</h5>
 
-</div>
-
-  <div class="col-lg-3 col-md-3 col-sm-3">
-                <select class="form-control select2" style="width: 100%;" name="tahun" onchange="this.form.submit()" required>
+<div class="col-lg-6 col-md-6 col-sm-6">
+                <select class="form-control select2" style="width: 100%;" name="bulan">
                   <option></option>
-      <option value='2014'>2014</option>
-      <option value='2015'>2015</option>
-        <option value='2016'>2016</option>
-          <option value='2017'>2017</option>
-            <option value='2018'>2018</option>
-              <option value='2019'>2019</option>
-                <option value='2020'>2020</option>
-                  <option value='2021'>2021</option>
-                    <option value='2022'>2022</option>
-                      <option value='2023'>2023</option>
-                        <option value='2024'>2024</option>
-                          <option value='2025'>2025</option>
-                            <option value='2026'>2026</option>
+      <option value='01'>Januari</option>
+        <option value='02'>Februari</option>
+          <option value='03'>Maret</option>
+            <option value='04'>April</option>
+              <option value='05'>Mei</option>
+                <option value='06'>Juni</option>
+                  <option value='07'>Juli</option>
+                    <option value='08'>Agustus</option>
+                      <option value='09'>September</option>
+                        <option value='10'>Oktober</option>
+                          <option value='11'>November</option>
+                            <option value='12'>Desember</option>
                 </select>
 
 </div>
+<div class="col-lg-6 col-md-6 col-sm-6">
+  <select class="form-control select2" style="width: 100%;" name="tahun" onchange="this.form.submit()">
+                <option></option>
+    <option value='2014'>2014</option>
+    <option value='2015'>2015</option>
+      <option value='2016'>2016</option>
+        <option value='2017'>2017</option>
+          <option value='2018'>2018</option>
+            <option value='2019'>2019</option>
+              <option value='2020'>2020</option>
+                <option value='2021'>2021</option>
+                  <option value='2022'>2022</option>
+                    <option value='2023'>2023</option>
+                      <option value='2024'>2024</option>
+                        <option value='2025'>2025</option>
+                          <option value='2026'>2026</option>
+              </select>
 
-  <div class="col-lg-6 col-md-6 col-sm-6">
+</div>
+          
+        </div>
+        <div class="col-md-6">
+          <h5>Filter Berdasarkan Tanggal</h5>
+
+          <div class="col-lg-6 col-md-6 col-sm-6">
+        <input type="text"  name="datepickerstart" id="datepickerstart"  class="form-control datepicker" autocomplete="off" value=""/>
+
+          </div>
+
+          <div class="col-lg-6 col-md-6 col-sm-6">
+          <input type="text"  name="datepickerend"  id="datepickerend" class="form-control datepicker"  autocomplete="off" value="" onchange="this.form.submit()"/>          
+          </div>
+
+        </div>
+        </div>  <!-- row -->
+
+        <script type="text/javascript">
+        
+        $(function(){          
+          $("#datepickerstart").datepicker({
+            format: 'yyyy-mm-dd',
+            autoclose: true,
+            todayHighlight: true,
+          });
+        });
+
+         var datepickerstart = $("#datepickerstart").value;        
+
+        $(function(){
+          $("#datepickerend").datepicker({
+              format: 'yyyy-mm-dd',
+              autoclose: true,
+              todayHighlight: true,
+          });
+        });
+
+        var datepickerend = $("#datepickerend").value;
+
+    </script>
+
+
+<br>
+  <div class="col-lg-12 col-md-6 col-sm-12" style="text-align:center;">
   <?php
 
 
-$sqlb="SELECT (SUM(total)-SUM(keluar)) AS total FROM $forward WHERE nota IN (SELECT nota FROM transaksimasuk) AND tglbayar LIKE '$tahun-$bulan-%'";
+if($bulan != "" || $bulan !=  null) {
+  $sqlb="SELECT (SUM(total)-SUM(keluar)) AS total FROM $forward WHERE nota IN (SELECT nota FROM transaksimasuk) AND tglbayar LIKE '$tahun-$bulan-%'";
+} else if($datepickerstart != ""  || $datepickerstart != null && $datepickeremd != ""  || $datepickeremd != null) {
+  $sqlb="SELECT (SUM(total)-SUM(keluar)) AS total FROM $forward WHERE nota IN (SELECT nota FROM transaksimasuk) AND tglbayar BETWEEN '$datepickerstart' AND '$datepickeremd'";
+}
+
+
 $hasila=mysqli_query($conn,$sqlb);
 $rowa=mysqli_fetch_assoc($hasila);
 $totalincome=$rowa['total'];
@@ -254,11 +308,20 @@ if($bulan == '1'){
 
 <?php if($tahun != null || $tahun != ""){ ?>
 
-                      <div class="well well-sm">
-                    <?php echo 'Income pada bulan <b>'.$namabulan.'</b> '.$tahun.' sejumlah <b>Rp '.number_format($totalincome, $decimal, $a_decimal, $thousand).',-</b>'; ?>
+                      <!-- <div class="well well-sm"> -->
+                    <?php 
+
+                    echo 'Income pada bulan <b>'.$namabulan.'</b> '.$tahun.' sejumlah <b>Rp '.number_format($totalincome, $decimal, $a_decimal, $thousand).',-</b>';
+                 
+                
+                    ?>
                 </div>
-                  <?php }else{} ?>
-</div>
+                  <?php }else if($datepickerstart != ""  || $datepickerstart != null && $datepickeremd != ""  || $datepickeremd != null){
+                    echo 'Income pada tanggal <b>'.$datepickerstart.'</b> sampai dengan <b>'.$datepickeremd.'</b> sejumlah <b> Rp '.number_format($totalincome, $decimal, $a_decimal, $thousand).',-</b>';
+
+                  } ?>
+                  
+<!-- </div> -->
                 </div>
 
           </form>
@@ -285,6 +348,7 @@ if($bulan == '1'){
      $no_urut = ($page - 1) * $rpp;
  ?>
                              <div class="box-body table-responsive">
+
                                      <table class="table table-hover ">
                                          <thead>
                                              <tr>
@@ -305,13 +369,27 @@ if($bulan == '1'){
      error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
      $bulan = $_POST['bulan'];
      $tahun = $_POST['tahun'];
+     $datepickerstart = $_POST['datepickerstart'];
+     $datepickerend = $_POST['datepickerend'];
 
-     if ($tahun != null || $tahun != "") {
+    //  var_dump($datepickerstart);
+    //  var_dump($datepickerend);
+
+
+     if ($tahun != null || $tahun != "" || $datepickerend != null || $datepickerend != "") {
 
          if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-               if(isset($_POST['tahun'])){
-         $query1="SELECT * FROM  $forward where nota IN (SELECT nota FROM transaksimasuk) and tglbayar like '$tahun-$bulan-%' order by no limit $rpp";
+          $expression = $_POST['tahun'] || $_POST['datepickerend'] ;
+               if($expression){
+
+                if($tahun != null || $tahun != ""){
+                  $query1="SELECT * FROM  $forward where nota IN (SELECT nota FROM transaksimasuk) and tglbayar like '$tahun-$bulan-%' order by no limit $rpp";
+                } else if ($datepickerend != null || $datepickerend != ""){
+                  $query1="SELECT * FROM  $forward where nota IN (SELECT nota FROM transaksimasuk) and tglbayar BETWEEN '$datepickerstart' AND '$datepickerend' order by no limit $rpp";
+                }
+
+
          $hasil = mysqli_query($conn,$query1);
          $no = 1;
          while ($fill = mysqli_fetch_assoc($hasil)){
@@ -336,11 +414,14 @@ if($bulan == '1'){
    <td>
    <?php  if ($chmod >= 3 || $_SESSION['jabatan'] == 'admin') { ?>
      <button type="button" class="btn btn-info btn-xs no-print" onclick="window.location.href='stok_detail?id=1&trx=1&nota=<?php  echo $fill['nota']; ?>'">Detail</button>
-  <?php } else {}?>
+  <?php } else {  }?>
+
+
 
      </td></tr><?php
            ;
-         }
+
+         } 
 
          ?>
                    </tbody></table>
@@ -348,7 +429,8 @@ if($bulan == '1'){
       <?php
        }
 
-     }
+
+     } 
 
    } else {
      while(($count<$rpp) && ($i<$tcount)) {

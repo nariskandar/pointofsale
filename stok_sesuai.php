@@ -292,7 +292,7 @@ if ($chmod >= 2 || $_SESSION['jabatan'] == 'admin') {
                                     <label for="sisa" class="col-sm-3 control-label">Stok Non Eceran:</label>
                                     <div class="col-sm-7">
                                       <input type="number" class="form-control" id="stoknoneceran_f" name="stoknoneceran_f"
-                                        value="" maxlength="50">
+                                        value="" maxlength="50" readonly>
                                     </div>
                                         <h5 class="col-md-2" id="satuan_f" value=""></h5>
                                   </div>

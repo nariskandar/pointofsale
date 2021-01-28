@@ -5,7 +5,6 @@ include "../../configuration/config_etc.php";
 include "../../configuration/config_include.php";
 include "../../configuration/config_chmod.php";
 
-
     if(!empty($_POST["barang"])) {
         $query ="SELECT barang.*, satuan.nama as nama_satuan FROM barang LEFT JOIN satuan ON barang.satuan = satuan.kode WHERE  barang.nama LIKE '" . $_POST["barang"] . "%' OR barang.kode LIKE '" . $_POST["barang"] . "%' ORDER BY barang.NO LIMIT 0,6";
         $result = mysqli_query($conn, $query);
